@@ -1,0 +1,22 @@
+<%- include ("../../partials/header.ejs") %>
+<style>
+    form, h3 {
+        font-size: 3rem;
+        margin-left: 2rem;
+    }
+    input {
+        font-size: 2rem;
+    }
+</style>
+<body>
+    <h3>Editar categoria:</h3>
+    <form action="/categories/update" method="POST">
+        <input type="text" name="id" value="<%= id %>" hidden>
+        <label for="title">
+            Título:
+            <input type="text" name="title" id="title">
+        </label><br>
+        <button type="submit">Editar</button>
+    </form>
+</body>
+</html>

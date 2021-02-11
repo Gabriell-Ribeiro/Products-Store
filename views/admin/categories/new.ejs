@@ -1,0 +1,22 @@
+<%- include ("../../partials/header.ejs") %>
+<style>
+    form, h3 {
+        font-size: 3rem;
+        margin-left: 2rem;
+    }
+
+    input {
+        font-size: 2rem;
+    }
+</style>
+<body>
+    <h3>Criar categoria:</h3>
+    <form action="/categories/save" method="POST">
+        <label for="title">
+            Título:
+            <input type="text" name="title" id="title">
+        </label><br>
+        <button type="submit">Criar</button>
+    </form>
+</body>
+</html>

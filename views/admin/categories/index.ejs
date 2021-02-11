@@ -1,0 +1,100 @@
+<%- include ("../../partials/header.ejs") %>
+<style>
+    .create {
+        display: inline-block;
+
+        margin: 3rem 1rem;
+        padding: .5rem .5rem;
+
+        font-size: 2rem;
+        text-decoration: none;
+
+        color: #000;
+        background-color: rgba(80, 177, 104, 0.667);
+
+        border-radius: 1rem; 
+    }
+
+    table {
+        margin: 1rem 1rem;
+
+        width: 100rem;
+    }
+
+    table, th, td {
+        font-size: 1.8rem;
+        border: 1px solid #000;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 1rem;
+
+        text-align: center;
+    }
+
+    a {
+        padding: .5rem .5rem;
+
+        font-size: 2rem;
+        text-decoration: none;
+
+        color: #000;
+        background-color: rgba(80, 177, 104, 0.667);
+
+        border-radius: 1rem;
+    }
+
+    .edit {
+        background-color: rgb(235, 206, 80);
+    }
+
+    form {
+        display: inline-block;
+    }
+
+    .delete {
+        cursor: pointer;
+        outline: none;
+
+        border: 0;
+        border-radius: 1rem;
+        padding: .5rem .5rem;
+
+        background-color: rgb(235, 80, 80);
+
+        font-size: 2rem;
+    }
+</style>
+<body>
+
+    <a href="/admin/categories/new" class="create">Crir nova categoria</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(data => { %>
+                <tr>
+                    <td><%= data.id %></td>
+                    <td><%= data.title %></td>
+                    <td><%= data.slug %></td>
+                    <td>
+                        <a href="/admin/categories/edit/<%= data.id %>" class="edit">Editar</a>
+                        <form action="/categories/delete" method="POST">
+                            <input type="text" name="id" value="<%= data.id %>" hidden>
+                            <button type="submit" class="delete">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
