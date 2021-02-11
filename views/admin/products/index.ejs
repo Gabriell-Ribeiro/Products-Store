@@ -1,5 +1,84 @@
 <%- include ("../../partials/header.ejs") %>
+<link rel="stylesheet" href="/style/table.css">
+<style>
+    .create {
+        display: inline-block;
+
+        margin: 3rem 1rem;
+        padding: .5rem .5rem;
+
+        font-size: 2rem;
+        text-decoration: none;
+
+        color: #000;
+        background-color: rgba(80, 177, 104, 0.667);
+
+        border-radius: 1rem; 
+    }
+
+    a {
+        padding: .5rem .5rem;
+
+        font-size: 2rem;
+        text-decoration: none;
+
+        color: #000;
+        background-color: rgba(80, 177, 104, 0.667);
+
+        border-radius: 1rem;
+    }
+
+    form {
+        display: inline-block;
+    }
+
+    .edit {
+        background-color: rgb(231, 228, 25);
+    }
+
+    .delete {
+        cursor: pointer;
+        outline: none;
+
+        border: 0;
+        border-radius: 1rem;
+        padding: .5rem .5rem;
+
+        background-color: rgb(235, 80, 80);
+
+        font-size: 2rem;
+    }
+</style>
 <body>
-    <h1>pp</h1>
+    <a href="/admin/products/new" class="create">Adicionar novo produto</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>CategoryId</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(product => { %>
+                <tr>
+                    <td><%= product.id %></td>
+                    <td><%= product.title %></td>
+                    <td><%= product.slug %></td>
+                    <td><%= product.categoryId %></td>
+                    <td>
+                        <a href="/admin/products/edit/<%= product.id %>" class="edit">Editar</a>
+                        <form action="/products/delete" method="POST">
+                            <input type="text" name="id" value="<%= product.id %>" hidden>
+                            <button type="submit" class="delete">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
 </body>
 </html>

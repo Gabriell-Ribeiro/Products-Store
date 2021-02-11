@@ -1,0 +1,21 @@
+table {
+    margin: 1rem 1rem;
+
+    width: 100rem;
+}
+
+table, th, td {
+    font-size: 1.8rem;
+    border: 1px solid #000;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem;
+
+    text-align: center;
+}
+
+.edit {
+    background-color: rgb(235, 206, 80);
+}

@@ -1,0 +1,60 @@
+<%- include ("../../partials/header.ejs") %>
+<style>
+    form, h3 {
+        font-size: 3rem;
+        margin-left: 2rem;
+    }
+
+    input {
+        font-size: 2rem;
+    }
+
+    .tox {
+        margin-top: 1rem;
+        width: 50rem;
+    }
+</style>
+<body>
+    <h3>Editar produto:</h3>
+
+    <form action="/products/update" method="POST">
+        <% data2.forEach(data => { %>
+            <input type="text" name="id" value="<%= id %>" hidden>
+
+            <label for="title">
+                Título:
+                <input type="text" name="title" id="title" value="<%= data.title %>" required>
+            </label><br>
+
+            <label for="price">
+                Preço:
+                <input type="number" name="price" id="price" value="<%= data.price %>" required>
+            </label><br>
+
+            <label for="image">
+                Imagem:
+                <input type="text" name="image" id="image" placeholder="https://" value="<%= data.image %>"  required>
+            </label><br>
+
+            <textarea name="description" id="description" placeholder="Descrição do produto"><%- data.description %></textarea>
+        <% }) %>
+
+        <select name="categoryId">
+            <% data1.forEach(category => { %>
+                <option value="<%= category.id %>"><%= category.title %></option>    
+            <% }) %>
+        </select><br>
+
+        <button type="submit">Editar</button>
+    </form>
+
+    <script src="https://cdn.tiny.cloud/1/jmdpq043vsgp75wv002zssy3vjwcnt8ml0dw7btbpdq596jk/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+          language: "pt_BR",
+          selector: "#description",
+          plugins: "advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons"
+        });
+      </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<%- include ("../../partials/header.ejs") %>
+<style>
+    form, h3 {
+        font-size: 3rem;
+        margin-left: 2rem;
+    }
+
+    input {
+        font-size: 2rem;
+    }
+
+    .tox {
+        margin-top: 1rem;
+        width: 50rem;
+    }
+</style>
+<body>
+    <h3>Criar produto:</h3>
+    <form action="/products/save" method="POST">
+        <label for="title">
+            Título:
+            <input type="text" name="title" id="title" required>
+        </label><br>
+
+        <label for="price">
+            Preço:
+            <input type="number" name="price" id="price" required>
+        </label><br>
+
+        <label for="image">
+            Imagem:
+            <input type="text" name="image" id="image" placeholder="https://" required>
+        </label><br>
+
+        <textarea name="description" id="description" placeholder="Descrição do produto"></textarea>
+
+        <select name="categoryId">
+            <% data.forEach(category => { %>
+                <option value="<%= category.id %>"><%= category.title %></option>    
+            <% }) %>
+        </select><br>
+
+        <button type="submit">Criar</button>
+    </form>
+
+    <script src="https://cdn.tiny.cloud/1/jmdpq043vsgp75wv002zssy3vjwcnt8ml0dw7btbpdq596jk/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+          language: "pt_BR",
+          selector: "#description",
+          plugins: "advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons"
+        });
+      </script>
+</body>
+</html>
