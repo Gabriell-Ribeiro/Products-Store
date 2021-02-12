@@ -2,6 +2,7 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const app = express()
 
+const DB = require("./database/database")
 const category = require("./database/category")
 const products = require("./database/products")
 
@@ -15,7 +16,11 @@ app.use("/", category)
 app.use("/", products)
 
 app.get("/", (req, res) => {
-    res.render("index")
+    DB.select("*").table("products").then(data => {
+        res.render("index", { data })
+    }).catch(err => {
+        console.log(err)
+    })
 })
 
 app.listen(3000)

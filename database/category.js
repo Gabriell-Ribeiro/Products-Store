@@ -32,12 +32,13 @@ router.post("/categories/save", (req, res) => {
 
 // Página de edição de categoria
 router.get("/admin/categories/edit/:id", (req, res) => { 
-    if(!isNaN(req.params.id)) {
-        var id = req.params.id
-        res.render("admin/categories/edit", { id })
-    } else {
-        res.redirect("/admin/categories")
-    }
+    var id = req.params.id
+
+    DB.where({ id: id}).select("title").table("categories").then(data => {
+        res.render("admin/categories/edit", { data, id })
+    }).catch(err => {
+        console.log(err)
+    })
 })
 
 // Editando a categoria

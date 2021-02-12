@@ -23,15 +23,17 @@
 
     <main>
         <section class="cards">
-          <div class="card">
-            <div class="image">
-              <img src="https://images.pexels.com/photos/5644323/pexels-photo-5644323.jpeg?cs=srgb&dl=pexels-laura-stanley-5644323.jpg&fm=jpg" />
-            </div>
-            <div class="content">
-              <p class="title">afwfawf</p>
-              <p class="value">50,00</p>
-            </div>
-          </div>
+            <% data.forEach(product => { %>
+                <div class="card">
+                    <div class="image">
+                        <img src="<%= product.image %>"/>
+                    </div>
+                    <div class="content">
+                        <p class="title"><%= product.title %></p>
+                        <p class="value">R$ <%= product.price %></p>
+                    </div>
+                </div>
+            <% }) %>
         </section>
     </main>
 
@@ -64,7 +66,5 @@
             </div>
         </div>
     </footer>
-
-    <script src="/scripts/script.js"></script>
 </body>
 </html>

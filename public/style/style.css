@@ -56,7 +56,7 @@ header .icon img {
 
 main {
     margin: 50px auto;
-    max-width: 1200px;
+    max-width: 1400px;
 }
 
 main .cards {
@@ -69,8 +69,10 @@ main .cards {
 }
 
 main .image img {
-    max-width: 600px;
-    width: 100%;
+    width: 300px;
+    height: 300px;
+
+    object-fit: cover;
 }
 
 main .content .title {
