@@ -1,6 +1,12 @@
 <%- include ("../../partials/header.ejs") %>
 <link rel="stylesheet" href="/style/table.css">
+<link rel="stylesheet" href="/style/navbar.css">
 <style>
+    .container {
+        width: 90rem;
+        margin: 5rem auto 0 auto;
+    }
+
     .create {
         display: inline-block;
 
@@ -46,33 +52,37 @@
     }
 </style>
 <body>
-    <a href="/admin/categories/new" class="create">Criar nova categoria</a>
+    <%- include ("../../partials/navbar.ejs") %>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Slug</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% data.forEach(data => { %>
+    <div class="container">
+        <a href="/admin/categories/new" class="create">Criar nova categoria</a>
+
+        <table>
+            <thead>
                 <tr>
-                    <td><%= data.id %></td>
-                    <td><%= data.title %></td>
-                    <td><%= data.slug %></td>
-                    <td>
-                        <a href="/admin/categories/edit/<%= data.id %>" class="edit">Editar</a>
-                        <form action="/categories/delete" method="POST">
-                            <input type="text" name="id" value="<%= data.id %>" hidden>
-                            <button type="submit" class="delete">Deletar</button>
-                        </form>
-                    </td>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Slug</th>
+                    <th>Ações</th>
                 </tr>
-            <% }) %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <% data.forEach(data => { %>
+                    <tr>
+                        <td><%= data.id %></td>
+                        <td><%= data.title %></td>
+                        <td><%= data.slug %></td>
+                        <td>
+                            <a href="/admin/categories/edit/<%= data.id %>" class="edit">Editar</a>
+                            <form action="/categories/delete" method="POST">
+                                <input type="text" name="id" value="<%= data.id %>" hidden>
+                                <button type="submit" class="delete">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

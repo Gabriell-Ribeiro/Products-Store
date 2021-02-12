@@ -1,0 +1,41 @@
+nav {
+    background-color: rgb(243, 243, 243);
+    padding: .3rem 0;
+}
+
+nav div {
+    display: flex;
+}
+
+/* Logo */
+nav div .logo {
+    display: flex;
+
+    align-items: center;
+
+    margin: 0 5rem;
+}
+
+nav div .logo img {
+    width: 3rem;
+    margin-right: 10px;
+}
+
+nav div .logo h2 {
+    font-size: 3rem;
+}
+
+/* Navbar list */
+nav div .nav-list {
+    display: flex;
+
+    list-style: none;
+}
+
+nav div .nav-list li {
+    margin: 1rem;
+}
+
+nav div .nav-list li a {
+    background-color: rgb(91, 225, 230);
+}

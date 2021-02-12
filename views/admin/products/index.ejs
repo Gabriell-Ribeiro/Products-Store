@@ -1,6 +1,13 @@
 <%- include ("../../partials/header.ejs") %>
 <link rel="stylesheet" href="/style/table.css">
+<link rel="stylesheet" href="/style/navbar.css">
+
 <style>
+    .container {
+        width: 90rem;
+        margin: 5rem auto 0 auto;
+    }
+
     .create {
         display: inline-block;
 
@@ -50,35 +57,39 @@
     }
 </style>
 <body>
-    <a href="/admin/products/new" class="create">Adicionar novo produto</a>
+    <%- include ("../../partials/navbar.ejs") %>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Slug</th>
-                <th>CategoryId</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% data.forEach(product => { %>
+    <div class="container">
+        <a href="/admin/products/new" class="create">Adicionar novo produto</a>
+
+        <table>
+            <thead>
                 <tr>
-                    <td><%= product.id %></td>
-                    <td><%= product.title %></td>
-                    <td><%= product.slug %></td>
-                    <td><%= product.categoryId %></td>
-                    <td>
-                        <a href="/admin/products/edit/<%= product.id %>" class="edit">Editar</a>
-                        <form action="/products/delete" method="POST">
-                            <input type="text" name="id" value="<%= product.id %>" hidden>
-                            <button type="submit" class="delete">Deletar</button>
-                        </form>
-                    </td>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Slug</th>
+                    <th>CategoryId</th>
+                    <th>Ações</th>
                 </tr>
-            <% }) %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <% data.forEach(product => { %>
+                    <tr>
+                        <td><%= product.id %></td>
+                        <td><%= product.title %></td>
+                        <td><%= product.slug %></td>
+                        <td><%= product.categoryId %></td>
+                        <td>
+                            <a href="/admin/products/edit/<%= product.id %>" class="edit">Editar</a>
+                            <form action="/products/delete" method="POST">
+                                <input type="text" name="id" value="<%= product.id %>" hidden>
+                                <button type="submit" class="delete">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
