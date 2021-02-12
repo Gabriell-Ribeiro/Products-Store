@@ -68,9 +68,15 @@ main .cards {
     gap: 60px;
 }
 
+main .cards .card {
+    width: 100%;
+}
+
 main .image img {
-    width: auto;
-    height: 300px;
+    width: 100%;
+    height: 350px;
+
+    object-fit: cover;
 }
 
 main .content .title {
