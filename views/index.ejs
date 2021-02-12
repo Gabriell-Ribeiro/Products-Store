@@ -1,5 +1,6 @@
 <%- include ("partials/header.ejs") %>
 <link rel="stylesheet" href="/style/style.css">
+<link rel="stylesheet" href="/style/button.css">
 <body>
     <header>
         <div class="logo">
@@ -18,13 +19,20 @@
     </div>
     <div class="info-top">
         <p>PROMOÇÃO</p>
-        <p id="quant-product">9 Produtos</p>
+        <p id="quant-product"><%= data2.length %> produtos</p>
+    </div>
+
+    <div id="btn-info">
+        <button>All</button>
+        <% data1.forEach(category => { %>
+            <button data-id="<%= category.id %>"><%= category.title %></button>
+        <% }) %>
     </div>
 
     <main>
         <section class="cards">
-            <% data.forEach(product => { %>
-                <div class="card">
+            <% data2.forEach(product => { %>
+                <div class="card" id="card" data-categoryId="<%= product.categoryId %>">
                     <div class="image">
                         <img src="<%= product.image %>"/>
                     </div>
@@ -66,5 +74,33 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        var btnElement = document.querySelectorAll("button")
+        var cardElement = document.querySelectorAll("div#card")
+
+        var id
+
+        btnElement.forEach(e => {
+            e.addEventListener("click", () => {
+                var id = e.dataset.id
+                checkId(id)
+                // console.log(id)
+            })
+        })
+
+        function checkId(id) {
+            cardElement.forEach(e => {
+                if(e.dataset.categoryid == id) {
+                    e.style.display = "initial"
+                } else {
+                    e.style.display = "none"
+                }
+            })
+        }
+
+        // console.log(btnElement[0].dataset.id)
+        // console.log(cardElement[0].dataset.categoryid)
+    </script>
 </body>
 </html>

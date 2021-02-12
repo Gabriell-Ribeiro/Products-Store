@@ -16,10 +16,12 @@ app.use("/", category)
 app.use("/", products)
 
 app.get("/", (req, res) => {
-    DB.select("*").table("products").then(data => {
-        res.render("index", { data })
-    }).catch(err => {
-        console.log(err)
+    DB.select("id", "title").table("categories").then(data1 => {
+        DB.select("*").table("products").then(data2 => {
+            res.render("index", { data1, data2 })
+        }).catch(err => {
+            console.log(err)
+        })
     })
 })
 

@@ -69,10 +69,8 @@ main .cards {
 }
 
 main .image img {
-    width: 300px;
+    width: auto;
     height: 300px;
-
-    object-fit: cover;
 }
 
 main .content .title {
