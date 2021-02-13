@@ -3,15 +3,6 @@ const router = express.Router()
 const DB = require("./database")
 const slugify = require("slugify")
 
-// Mostrando todas as categorias
-router.get("/admin/categories", (req, res) => {
-    // Pegando os itens cadastrados no bando de dados
-    DB.select("*").table("categories").then(data => {
-        res.render("admin/categories/index", { data })
-    }).catch(err => {
-        console.log(err)
-    })
-})
 
 // Página de criação de categoria
 router.get("/admin/categories/new", (req, res) => {
@@ -30,6 +21,16 @@ router.post("/categories/save", (req, res) => {
     })
 })
 
+// Mostrando todas as categorias
+router.get("/admin/categories", (req, res) => {
+    // Pegando os itens cadastrados no bando de dados
+    DB.select("*").table("categories").then(data => {
+        res.render("admin/categories/index", { data })
+    }).catch(err => {
+        console.log(err)
+    })
+})
+
 // Página de edição de categoria
 router.get("/admin/categories/edit/:id", (req, res) => { 
     var id = req.params.id
@@ -41,7 +42,7 @@ router.get("/admin/categories/edit/:id", (req, res) => {
     })
 })
 
-// Editando a categoria
+// Editando uma categoria
 router.post("/categories/update", (req, res) => {
     var { id, title } = req.body
 

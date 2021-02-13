@@ -1,0 +1,52 @@
+.container {
+    width: 90rem;
+    margin: 5rem auto 0 auto;
+}
+
+.create {
+    display: inline-block;
+
+    margin: 3rem 1rem;
+    padding: .5rem .5rem;
+
+    font-size: 2rem;
+    text-decoration: none;
+
+    color: #000;
+    background-color: rgba(80, 177, 104, 0.667);
+
+    border-radius: 1rem; 
+}
+
+a {
+    padding: .5rem .5rem;
+
+    font-size: 2rem;
+    text-decoration: none;
+
+    color: #000;
+    background-color: rgba(80, 177, 104, 0.667);
+
+    border-radius: 1rem;
+}
+
+form {
+    display: inline-block;
+}
+
+.edit {
+    background-color: rgb(231, 228, 25);
+}
+
+.delete {
+    cursor: pointer;
+    outline: none;
+
+    border: 0;
+    border-radius: 1rem;
+    padding: .5rem .5rem;
+
+    background-color: rgb(235, 80, 80);
+
+    font-size: 2rem;
+}
