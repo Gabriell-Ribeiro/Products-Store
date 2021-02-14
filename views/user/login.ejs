@@ -1,0 +1,24 @@
+<%- include ("../partials/header.ejs") %>
+<link rel="stylesheet" href="/style/login.css">
+<body>
+    <div class="container">
+
+        <div class="login">
+            <h3>Faça seu Login:</h3>
+
+            <form action="/authenticate" method="POST">
+                <label for="email">
+                    Email:
+                    <input type="email" name="email" id="email"><br>
+                </label>
+                <label for="password">
+                    Password:
+                    <input type="password" name="password" id="password"><br>
+                </label>
+                <button type="submit">Logar</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

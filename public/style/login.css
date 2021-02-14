@@ -1,0 +1,33 @@
+body {
+    background-color: #f1f1f1; 
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .login {
+    font-size: 6rem;
+    padding: 10rem 6rem;
+    background: rgb(134, 170, 167);
+}
+
+.container .login  h3 {
+    color: #444444;
+
+    margin-bottom: 3rem;
+}
+
+.container .login label {
+    color: #444444;
+}
+
+.container .login label input {
+    width: 30rem;
+    height: 3rem;
+}
