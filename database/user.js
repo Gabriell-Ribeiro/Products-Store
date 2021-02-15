@@ -15,13 +15,23 @@ router.get("/login/new", (req, res) => {
 router.post("/login/create", (req, res) => {
     var { email, password } = req.body
 
-    bcrypt.hash(password, saltRounds, function(err, hash) {
-        DB.insert({email: email, password: hash}).table("users").then(data => {
-            res.redirect("/")
-        }).catch(err => {
-            console.log(err)
-        })
-    });
+
+    // verifica se o email está cadastrado do DB, se tiver cadastrado ele seleciona no banco o email e senha
+    DB.where({ email: email}).select("*").table("users").then(data => {
+        if(data[0]) {
+            res.redirect("/login")
+        } else {
+            bcrypt.hash(password, saltRounds, function(err, hash) {
+                DB.insert({email: email, password: hash}).table("users").then(data => {
+                    res.redirect("/")
+                }).catch(err => {
+                    console.log(err)
+                })
+            });      
+        }
+    }).catch(err => {
+        console.log(err)
+    })
 })
 
 // Página de login
@@ -33,16 +43,19 @@ router.get("/login", (req, res) => {
 router.post("/authenticate", (req, res) => {
     var { email, password } = req.body
 
-    // verifica se o email é correto, se tiver correto seleciona no banco o email e senha
-    //
-    DB.where({ email: email}).select("email", "password").table("users").then(data => {
-        if(!data) {
-            console.log(data)
+    // verifica se o email está cadastrado do DB, se tiver cadastrado ele seleciona no banco o email e senha
+    DB.where({ email: email}).select("id", "email", "password").table("users").then(data => {
+        if(!data[0]) {
             res.redirect("/login")
         } else {
+            // Comparando a senha digitada no login com a cadastrada no DB 
             data.forEach(data => {
                 bcrypt.compare(password, data.password, function(err, result) {
                     if(result) {
+                        req.session.user = {
+                            id: data.id,
+                            email: data.email
+                        }
                         res.redirect("/")
                     } else {
                         res.redirect("/login")

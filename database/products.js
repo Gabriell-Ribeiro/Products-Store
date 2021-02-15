@@ -3,8 +3,11 @@ const router = express.Router()
 const DB = require("./database")
 const slugify = require("slugify")
 
+// Middleware
+const adminAuth = require("../middleware/adminAuth")
+
 // Página de criação de produto
-router.get("/admin/products/new", (req, res) => {
+router.get("/admin/products/new", adminAuth, (req, res) => {
     DB.select("*").table("categories").then(data => {
         res.render("admin/products/new", { data })
     }).catch(err => {
@@ -13,7 +16,7 @@ router.get("/admin/products/new", (req, res) => {
 })
 
 // Salvando o produto
-router.post("/products/save", (req, res) => {
+router.post("/products/save", adminAuth, (req, res) => {
     var {title, price, image, description, categoryId } = req.body
 
     // Salvando no banco de dados
@@ -32,7 +35,7 @@ router.post("/products/save", (req, res) => {
 })
 
 // Página admin dos produtos
-router.get("/admin/products", (req, res) => {
+router.get("/admin/products", adminAuth, (req, res) => {
     DB.select("*").table("products").then(data => {
         res.render("admin/products/index", { data })
     }).catch(err => {
@@ -41,7 +44,7 @@ router.get("/admin/products", (req, res) => {
 })
 
 // Página de edição do produto
-router.get("/admin/products/edit/:id", (req, res) => {
+router.get("/admin/products/edit/:id", adminAuth, (req, res) => {
     var id = req.params.id
 
     // Pegando os itens no banco de dados
@@ -55,7 +58,7 @@ router.get("/admin/products/edit/:id", (req, res) => {
 })
 
 // Salvando a edição
-router.post("/products/update", (req, res) => {
+router.post("/products/update", adminAuth, (req, res) => {
     var { id, title, price, image, description, categoryId } = req.body
 
     // Salvando a edição no banco de dados
@@ -74,7 +77,7 @@ router.post("/products/update", (req, res) => {
 })
 
 // Deletando produto
-router.post("/products/delete", (req, res) => {
+router.post("/products/delete", adminAuth, (req, res) => {
     var id = req.body.id
 
     DB.where({ id: id }).delete().table("products").then(data => {

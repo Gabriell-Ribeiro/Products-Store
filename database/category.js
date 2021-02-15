@@ -3,14 +3,16 @@ const router = express.Router()
 const DB = require("./database")
 const slugify = require("slugify")
 
+// Middleware
+const adminAuth = require("../middleware/adminAuth")
 
 // Página de criação de categoria
-router.get("/admin/categories/new", (req, res) => {
+router.get("/admin/categories/new", adminAuth, (req, res) => {
     res.render("admin/categories/new")
 })
 
 // Salvando a categoria
-router.post("/categories/save", (req, res) => {
+router.post("/categories/save", adminAuth, (req, res) => {
     var title = req.body.title
 
     // Salvando no banco de dados
@@ -22,7 +24,7 @@ router.post("/categories/save", (req, res) => {
 })
 
 // Mostrando todas as categorias
-router.get("/admin/categories", (req, res) => {
+router.get("/admin/categories", adminAuth, (req, res) => {
     // Pegando os itens cadastrados no bando de dados
     DB.select("*").table("categories").then(data => {
         res.render("admin/categories/index", { data })
@@ -32,7 +34,7 @@ router.get("/admin/categories", (req, res) => {
 })
 
 // Página de edição de categoria
-router.get("/admin/categories/edit/:id", (req, res) => { 
+router.get("/admin/categories/edit/:id", adminAuth, (req, res) => { 
     var id = req.params.id
 
     DB.where({ id: id}).select("title").table("categories").then(data => {
@@ -43,7 +45,7 @@ router.get("/admin/categories/edit/:id", (req, res) => {
 })
 
 // Editando uma categoria
-router.post("/categories/update", (req, res) => {
+router.post("/categories/update", adminAuth, (req, res) => {
     var { id, title } = req.body
 
     // Atualizando o dado
@@ -55,7 +57,7 @@ router.post("/categories/update", (req, res) => {
 })
 
 // Deletar uma categoria
-router.post("/categories/delete", (req, res) => {
+router.post("/categories/delete", adminAuth, (req, res) => {
     var id = req.body.id
     
     DB.where({ id: id}).delete().table("categories").then(data => {
